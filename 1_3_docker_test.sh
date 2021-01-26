@@ -1,0 +1,3 @@
+. ./0_set_env.sh
+echo "curl $BASE_URL:$DOCKER_PORT$API_ENDPOINT"
+curl $BASE_URL:$DOCKER_PORT$API_ENDPOINT

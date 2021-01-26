@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-api-feed
+  labels:
+    app: udagram-api-feed
+    type: api
+ spec:
+   template:
+    metadata:
+      name: udagram-api-feed_pod
+      labels:
+        app: udagram-users
+    spec:
+      containers:
+      - name: udagram-api-feed
+        image: theresmith/udagram_api_feed
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+          name: app-config        
+        envFrom:
+        - secretRef:
+          name: app-secret
+      command: ["echo"]
+        args: ["POSTGRES_HOST: $(POSTGRES_HOST)"]
+      command: ["echo"]
+        args: ["POSTGRES_PASSWORD: $(POSTGRES_PASSWORD)"]

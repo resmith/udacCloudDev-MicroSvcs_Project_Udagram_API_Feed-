@@ -1,0 +1,26 @@
+env:
+  global:
+    - IMAGE_NAME=theresmith/udagram_api_feed
+
+language: node_js
+node_js:
+  - 15.4.0
+
+services:
+  - docker
+
+# Pre-testing installs
+install:
+  - echo "nothing needs to be installed pre-test"
+
+# Scripts to be run such as test
+before_script:
+  - echo "no tests"
+
+script:
+  - docker --version
+  - docker build -t $IMAGE_NAME:latest .
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push "$IMAGE_NAME"

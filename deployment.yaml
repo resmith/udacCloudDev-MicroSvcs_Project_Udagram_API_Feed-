@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-api-feed
+  labels:
+    app: udagram-api-feed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: udagram-api-feed
+  template:
+    metadata:
+      labels:
+        app: udagram-api-feed
+    spec:
+      containers:
+      - name: udagram-api-feed
+        image: theresmith/udagram_api_feed
+        # image: ubuntu:groovy
+        imagePullPolicy: "Always"
+        resources:
+          limits:
+            cpu: "2"
+          requests:
+            cpu: "1"
+          limits:
+            memory: "700Mi"
+          requests:
+            memory: "100Mi"
+        ports:
+        - containerPort: 8090
+        envFrom:
+        - configMapRef:
+            name: app-config    
+        - secretRef:
+            name: app-secret
+        env:
+        - name: MESSAGE
+          value: "hello world"          
+        # command: ["tail"]
+        # args: ["-f","/dev/null"]         
+        # command: ["printenv"]
+        # args: ["POSTGRES_HOST", "POSTGRES_USERNAME", "POSTGRES_PASSWORD","MESSAGE"]
