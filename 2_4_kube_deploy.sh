@@ -1,4 +1,9 @@
 . ./0_set_env.sh
-kubectl apply -f ./deployment.yaml
 #
-export POD_NAME=$(kubectl get pods -o custom-columns=NAME:.metadata.name | grep $APP_NAME)
+# In case Docker image is changed
+# otherwise kube will say 'unchanged' because of no change to deployment.yaml
+kubectl delete -f ./deployment.yaml
+#
+kubectl apply -f ./deployment.yaml
+kubectl apply -f ./service.yaml
+#

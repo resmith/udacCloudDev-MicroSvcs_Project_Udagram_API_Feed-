@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: udagram-api-feed
   labels:
-    app: udagram-api-feed
+    app: udagram
 spec:
   replicas: 1
   selector:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: udagram-api-feed
-        image: theresmith/udagram_api_feed
+        image: theresmith/udagram-api-feed
         # image: ubuntu:groovy
         imagePullPolicy: "Always"
         resources:
@@ -29,7 +29,7 @@ spec:
           requests:
             memory: "100Mi"
         ports:
-        - containerPort: 8090
+        - containerPort: 8080
         envFrom:
         - configMapRef:
             name: app-config    

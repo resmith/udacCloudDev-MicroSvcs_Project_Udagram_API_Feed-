@@ -19,7 +19,8 @@ echo "\n** Contents of app-config-secret.yaml"
 cat  app-config-secret.yaml
 
 kubectl apply -f app-config-secret.yaml
-# kubectl delete -f app-config-secret.yaml
+
+rm app-config-secret.yaml
 
 # echo "\n** describe secrets"
  kubectl describe secrets
